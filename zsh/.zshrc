@@ -58,10 +58,12 @@
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # source $ZSH/oh-my-zsh.sh
-
 # User configuration
+if [[ $(uname -r) =~ microsoft ]]; then
+  echo "Bash is running on WSL"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -82,7 +84,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-eval "$(tmuxifier init -)"
+# export PATH="$HOME/.tmuxifier/bin:$PATH"
+# eval "$(tmuxifier init -)"
 
-eval "$(starship init zsh)"
+# Set up custom prompt 
+# eval "$(starship init zsh)"
+
+# Only use oh-my-posh when not using the defalt apple terminal.
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh)"
+fi
