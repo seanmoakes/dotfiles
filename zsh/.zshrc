@@ -60,7 +60,6 @@
 # source $ZSH/oh-my-zsh.sh
 # User configuration
 if [[ $(uname -r) =~ microsoft ]]; then
-  echo "Bash is running on WSL"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
@@ -88,9 +87,9 @@ export NVM_DIR="$HOME/.nvm"
 # eval "$(tmuxifier init -)"
 
 # Set up custom prompt 
-# eval "$(starship init zsh)"
+ eval "$(starship init zsh)"
 
 # Only use oh-my-posh when not using the defalt apple terminal.
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh)"
-fi
+#if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+#  eval "$(oh-my-posh init zsh)"
+#fi
