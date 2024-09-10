@@ -37,12 +37,8 @@ if getOS() == "Windows" then
 	config.default_domain = "WSL:Ubuntu-22.04"
 end
 
---config.font = wezterm.font_with_fallback({
---	{ family = "CaskaydiaCove Nerd Font Mono", weight = "Bold" },
---	"JetBrains Mono",
---	"Fira Code",
---})
-config.font = wezterm.font("Operator Mono SSm Lig Book")
+config.font = wezterm.font("Operator Mono SSm Lig", { weight = 400, stretch = "Normal", style = "Normal" })
 config.window_background_opacity = 0.9
+
 -- and finally, return the configuration to wezterm
 return config
