@@ -10,6 +10,7 @@ function getOS()
 	local osname
 	-- ask LuaJIT first
 	if jit then
+		print(jit.os)
 		return jit.os
 	end
 
@@ -22,23 +23,26 @@ function getOS()
 	return osname or "Windows"
 end
 
--- This is where you actually apply your config choices
+-- OS independent Settings
 config = {
 	color_scheme = "catppuccin-mocha", -- color scheme:
 	automatically_reload_config = true,
 	window_close_confirmation = "NeverPrompt",
 	enable_tab_bar = false,
-	-- window_decorations = "RESIZE",
+	window_background_opacity = 0.9,
 }
 
-print("This will be the OS debug printout")
-
 if getOS() == "Windows" then
+	-- WSL
 	config.default_domain = "WSL:Ubuntu-22.04"
+elseif wezterm.target_triple == "aarch64-apple-darwin" then
+	-- MacOS Apple Silicon
+	config.window_decorations = "RESIZE"
 end
 
-config.font = wezterm.font("Operator Mono SSm Lig", { weight = 400, stretch = "Normal", style = "Normal" })
-config.window_background_opacity = 0.9
+config.font = wezterm.font_with_fallback({
+	{ family = "Operator Mono SSm Lig", weight = 400, stretch = "Normal", style = "Normal" },
+	"JetBrains Mono",
+})
 
--- and finally, return the configuration to wezterm
 return config
